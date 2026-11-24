@@ -75,6 +75,9 @@ form { display: flex; flex-direction: column; gap: 14px; background: var(--surfa
   font: 600 22px var(--body); font-variant-numeric: tabular-nums; padding: 12px; border-radius: 10px;
   border: 2px solid var(--line); background: var(--bg); color: var(--fg); width: 100%; min-width: 0;
 }
+.field input { -webkit-appearance: none; appearance: none; display: block; max-width: 100%; min-height: 56px; text-align: left; }
+.field input[type="time"]::-webkit-date-and-time-value { text-align: left; margin: 0; }
+.field input[type="time"]::-webkit-calendar-picker-indicator { margin-left: auto; }
 .field input:focus { border-color: var(--accent); outline: none; }
 .calc { background: var(--accent); color: var(--accent-fg); border: 0; border-radius: 12px; padding: 16px; font: 700 22px var(--display); letter-spacing: .03em; text-transform: uppercase; cursor: pointer; }
 .calc:focus-visible { outline: 3px solid var(--fg); outline-offset: 2px; }
