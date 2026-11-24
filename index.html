@@ -139,12 +139,12 @@ function aHora(min) { min = Math.round(min); const d = Math.floor(min / 1440); m
   return pad(Math.floor(min / 60)) + ":" + pad(min % 60) + (d > 0 ? " (+" + d + " día)" : ""); }
 const fmt = (n, dec = 0) => n.toLocaleString("es-ES", { maximumFractionDigits: dec });
 function dur(min) { min = Math.round(min); const h = Math.floor(min / 60), m = min % 60;
-  return (h ? h + " h " : "") + (m || !h ? m + " min" : "").trim(); }
+  return ((h ? h + " h " : "") + (m || !h ? m + " min" : "")).trim(); }
 
 // Datos fijos de la mesa
 const KG_POR_CAJA = 18;        // peso medio de una caja de contramuslo con hueso
 const RENDIMIENTO = 0.66;      // carne que queda al quitar el hueso
-const KG_PERSONA_HORA = 50;    // kg de carne que hace una persona en una hora
+const KG_PERSONA_HORA = 45;    // kg de carne que hace una persona en una hora
 
 const PREGUNTAS = {
   hora: {
@@ -156,7 +156,7 @@ const PREGUNTAS = {
       { id: "cajas", label: "Cajas de contramuslo que quedan", value: 100 },
       { id: "personas", label: "Personas en la mesa", value: 8 },
     ],
-    // Y = cajas × 18 × 0,66 (kg de carne)  ·  horas = Y / (personas × 50)  ·  fin = hora actual + horas
+    // Y = cajas × 18 × 0,66 (kg de carne)  ·  horas = Y / (personas × 45)  ·  fin = hora actual + horas
     calcular(d) {
       if (!(d.cajas >= 0) || !(d.personas > 0)) return { big: "—", sub: "Pon el número de cajas y de personas." };
       const Y = d.cajas * KG_POR_CAJA * RENDIMIENTO;
@@ -188,7 +188,7 @@ const PREGUNTAS = {
       { id: "horaObjetivo", label: "Hora a la que quieres acabar", type: "time", value: "14:00" },
       { id: "cajas", label: "Cajas de contramuslo que quedan", value: 100 },
     ],
-    // kg = cajas × 18 × 0,66  ·  personas = kg / (50 × horas disponibles), sin redondear
+    // kg = cajas × 18 × 0,66  ·  personas = kg / (45 × horas disponibles), sin redondear
     calcular(d) {
       let disp = aMin(d.horaObjetivo) - aMin(d.horaActual);
       if (disp <= 0) disp += 1440;
@@ -223,7 +223,7 @@ const PREGUNTAS = {
       { id: "cajas", label: "Cajas de contramuslo que quedan", value: 100 },
       { id: "personas", label: "Personas en la mesa", value: 8 },
     ],
-    // carne total = cajas × 18 × 0,66  ·  hecha = personas × 50 × horas hasta fin de turno  ·  queda = total − hecha
+    // carne total = cajas × 18 × 0,66  ·  hecha = personas × 45 × horas hasta fin de turno  ·  queda = total − hecha
     calcular(d) {
       if (!(d.cajas >= 0) || !(d.personas > 0)) return { big: "—", sub: "Pon las cajas y las personas." };
       let disp = aMin(d.horaCierre) - aMin(d.horaActual);
